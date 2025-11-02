@@ -1,5 +1,6 @@
 import React from 'react';
 import { GlobalStyle } from './Styles/global';
+import TypingBox from './Components/TypingBox'
 function App() {
   return (
     <>
@@ -8,7 +9,7 @@ function App() {
         <div className="canvas">
            <GlobalStyle />
           <div>Header</div>
-          <div>Main</div>
+          <TypingBox />
           <div>Footer</div>
         </div>
       </div>
