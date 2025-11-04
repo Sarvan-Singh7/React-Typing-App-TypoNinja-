@@ -29,7 +29,7 @@ export const GlobalStyle = createGlobalStyle`
     height: 140px;
     margin-left:auto;
     margin-right:auto;
-    // overflow: hidden;
+    overflow: hidden;
 }
 
 .words{
@@ -40,5 +40,9 @@ export const GlobalStyle = createGlobalStyle`
 .word{
     margin:5px;
     padding-right:2px;
+}
+    .hidden-input{
+        opacity : 0;
+    }
 `;
 
