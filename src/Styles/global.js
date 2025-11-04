@@ -44,5 +44,23 @@ export const GlobalStyle = createGlobalStyle`
     .hidden-input{
         opacity : 0;
     }
-`;
+.current{
+    border-left: 1px solid white;
+    animation: blinking 1s infinite;
+    animation-timing-function: ease;
+    @keyframes blinking{
+    0%{border-left-color : white;}
+    25%{border-left-color : green;}
+    50%{border-left-color : white;}
+    75%{border-left-color : green;}
+    100%{border-left-color : white;}
+    }
+}
+.correct{
+    color : green;  
+}
+.incorrect{
+    color : red;
+}
 
+`;
