@@ -10,7 +10,35 @@ const TypingBox = () => {
 
   const handleUserInput=(e)=>{
     const allCurrChars = wordsSpanRef[currWordIndex].current.childNodes; //array created to hold all characters of current word 
+    if(e.keyCode ===8){
+      // backspace key pressed
 
+      
+
+      if(currCharIndex ===0) return; // if we are at starting of word and backspace is pressed then simply return
+      if(currCharIndex !=0){
+
+         if(allCurrChars.length === currCharIndex){
+          if(allCurrChars[currCharIndex -1].className.includes('extra')){ // if there is an extra character and backspace is pressed then remove that extra character
+            allCurrChars[currCharIndex -1].remove();
+            allCurrChars[currCharIndex -2].className +=' right-current'; // give right current class to previous character
+            
+            }else{
+                      allCurrChars[currCharIndex -1].className ='current'; // if we are at end of word and backspace is pressed then simply move cursor to last character
+
+            }
+        setcurrCharIndex(currCharIndex -1);
+        return;
+      }
+
+         allCurrChars[currCharIndex].className =''; // remove current class from current character as now not incorrect nor correct
+          allCurrChars[currCharIndex -1].className ='current'; // previous character ko current class de diya ys hmne cursor ko wapis piche le jane ke liye
+          setcurrCharIndex(currCharIndex -1); // move back to previous character
+      }
+
+      return;
+    }
+    
     if(e.keyCode ===32){
       // space key pressed
 
@@ -26,14 +54,28 @@ const TypingBox = () => {
       return;
     }
     
+   if(currCharIndex == allCurrChars.length){  // if current character index is equal to length of current word that means user is trying to type more characters than present in the word
+
+      let newSpan = document.createElement('span'); // create a new span element
+      newSpan.innerText = e.key; // set its text to the pressed key
+      newSpan.className ='incorrect extra right-current'; // add incorrect and extra class to it
+      allCurrChars[currCharIndex-1].classList.remove('right-current'); // remove right current class from previous character so now cursor can move also after this new character entered in word
+      wordsSpanRef[currWordIndex].current.append(newSpan); // append this new span to the current word
+      
+      
+      
+      setcurrCharIndex(currCharIndex + 1); // move to next character
+      return;
+    }
+
     if(e.key === allCurrChars[currCharIndex].innerText){
       allCurrChars[currCharIndex].className ='correct'; // correct class add kar diya
     }else{
       allCurrChars[currCharIndex].className ='incorrect'; // incorrect class add kar diya
     }
     if(currCharIndex+1 === allCurrChars.length){  //agar current character last character hai current word ka so move to next word
-      allCurrChars[currCharIndex].className +=' right-current';
-    }else{                                        //agar last character nahi hai to simply move to next character
+      allCurrChars[currCharIndex].className +=' right-current'; 
+    }else{                                        //agar last character nahi hai to simply move to next character matlb ki ek word ke kissi letter pe agar space press karte hai to next letter pe chala jaye
       allCurrChars[currCharIndex+1].className = 'current';
     }
 
