@@ -1,7 +1,29 @@
 import React, { useState, useRef , useEffect ,useMemo, createRef} from 'react';
 import { generate } from 'random-words'; // generates random words
+import UpperMenu from './UpperMenu';
 
-const TypingBox = () => {
+
+const TypingBox = () => { 
+
+   const[CountDown, setCountDown] = useState(15); //Timer (Count Timer State)
+   const[testStart, setTestStart] = useState(false); //Timer (To check if test has started or not)
+   const[testEnd, setTestEnd] = useState(false);     //Timer (To check if test has ended or not)
+   const StartTimer =() => {                      //Timer (Timer Functionality added)
+    const intervalId = setInterval(timer, 1000);
+    function timer(){
+      //setCountDown(CountDown - 1);   //this will stop after one time decrease as useState is asynchronous
+      setCountDown((latestCountDown)=>{   //i used function form of useState to get latest value of CountDown
+        if(latestCountDown === 1){
+          clearInterval(intervalId);
+          setTestEnd(true);
+          return 0;
+        }
+        return latestCountDown - 1;
+      })
+    }
+   } 
+
+
   // useState with function form → only runs once
   const [wordsArray, setWordsArray] = useState(() => generate(50));
   const[currWordIndex, setcurrWordIndex] = useState(0); // to keep track of current word
@@ -9,11 +31,18 @@ const TypingBox = () => {
   const inputRef = useRef(null);
 
   const handleUserInput=(e)=>{
+
+
+    if(!testStart){    //Timer( to start the timer when user starts typing)
+      StartTimer();
+      setTestStart(true);
+    }
+
     const allCurrChars = wordsSpanRef[currWordIndex].current.childNodes; //array created to hold all characters of current word 
     if(e.keyCode ===8){
       // backspace key pressed
 
-      
+         
 
       if(currCharIndex ===0) return; // if we are at starting of word and backspace is pressed then simply return
       if(currCharIndex !=0){
@@ -27,6 +56,7 @@ const TypingBox = () => {
                       allCurrChars[currCharIndex -1].className ='current'; // if we are at end of word and backspace is pressed then simply move cursor to last character
 
             }
+
         setcurrCharIndex(currCharIndex -1);
         return;
       }
@@ -97,7 +127,8 @@ const TypingBox = () => {
 
   return (
     <div>
-      <div className="type-box" onClick ={focusInput}>   {/* onClick calls focusInput function  because it needs to focus the hidden input */}
+      <UpperMenu countDown = {CountDown} />
+      {(testEnd) ? <h1>Test Ended</h1> : (<div className="type-box" onClick ={focusInput}>   {/* onClick calls focusInput function  because it needs to focus the hidden input */}
         <div className="words">
           {wordsArray.map((word, index) => (
             <span className="word" key={index} ref={wordsSpanRef[index]}>
@@ -108,7 +139,7 @@ const TypingBox = () => {
             
           ))}
         </div>
-      </div>
+      </div>)}  {/* Timer(see that i used condition in this box )*/ }
       <input
         type="text"
         onKeyDown={handleUserInput}
