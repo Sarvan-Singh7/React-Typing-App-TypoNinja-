@@ -4,7 +4,7 @@ export const GlobalStyle = createGlobalStyle`
 *{box-sizing : border-box;}
 
   body {
-    background-color: green;
+    background-color: black;
     color : white;
     margin :0;
     padding :0;
@@ -76,4 +76,22 @@ export const GlobalStyle = createGlobalStyle`
     color : red;
 }
 
+.upperMenu{     
+  display : flex;
+  width :1000px;
+  margin-left:auto;
+  margin-right: auto;
+  justify-content: space-between;  /*by this 15 side mein and options to choose time ek side pe*/
+  font-size: 1.35rem;
+  padding: 0.5rem
+}
+.modes{       /*This is also for uppermenu ke bhi andar jo 3 options hai unke liyr*/
+  display : flex;
+  gap : 0.4rem;
+
+}
+  .time-mode:hover{  /*add this hover effect to other nodes also*/
+      color: green;
+      cursor: pointer;
+  }
 `;

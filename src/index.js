@@ -1,11 +1,14 @@
 import React from 'react';
 import App from './App';
 import ReactDOM from 'react-dom/client';
+import {TestModeContextProvider} from "./Context/TestModeContext"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <TestModeContextProvider>  {/*see here that i wrap my app component under App so that every component of  a file can get acces to it */}
+        <App />
+    </TestModeContextProvider>
   </React.StrictMode>
 );
 

@@ -1,15 +1,21 @@
 import React, { useState, useRef , useEffect ,useMemo, createRef} from 'react';
 import { generate } from 'random-words'; // generates random words
 import UpperMenu from './UpperMenu';
+import { useTestMode } from '../Context/TestModeContext'
+
 
 
 const TypingBox = () => { 
 
-   const[CountDown, setCountDown] = useState(15); //Timer (Count Timer State)
+   const{testTime} = useTestMode();  //TImer2 (this comes from UpperMenu after set as Context used so it may be 15,30 or 60, now i used this to apply in useEffect used below)
+
+   const[CountDown, setCountDown] = useState(testTime); //Timer (Count Timer State as set testTime because it will come after modification from Uppermenu that what to set it)
    const[testStart, setTestStart] = useState(false); //Timer (To check if test has started or not)
    const[testEnd, setTestEnd] = useState(false);     //Timer (To check if test has ended or not)
+   const[intervalId, setIntervalId] = useState(null); //Timer2(there was a issue that  whenever i was changing mode between writting then it was showing not working correctly so used this )
    const StartTimer =() => {                      //Timer (Timer Functionality added)
     const intervalId = setInterval(timer, 1000);
+    setIntervalId(intervalId);  //Timer2
     function timer(){
       //setCountDown(CountDown - 1);   //this will stop after one time decrease as useState is asynchronous
       setCountDown((latestCountDown)=>{   //i used function form of useState to get latest value of CountDown
@@ -21,11 +27,33 @@ const TypingBox = () => {
         return latestCountDown - 1;
       })
     }
-   } 
+   }
+   const resetTest= () =>{////Timer2(i used this resetTest to pass to useEffect that whenever count option from UpeerMenu.jsx will change then we have to reset it via resetTest so this make to reset all )
+    clearInterval(intervalId);  //Timer2(i cleared interval here)
+    setCountDown(testTime);
+    setcurrCharIndex(0);
+    setcurrWordIndex(0);
+    setTestStart(false);
+    setTestEnd(false);
+    setWordsArray(generate(50));
+    resetWordsSpanRefClassname();
+    focusInput();
+   }
+
+   const resetWordsSpanRefClassname =()=>{ //Timer2 (this function will be used when to reset words on new mode )
+       wordsSpanRef.map(i => {
+        Array.from(i.current.childNodes).map(j => {
+          j.className = ' ';
+        })
+       });
+       wordsSpanRef[0].current.childNodes[0].className = 'current'; //Timer2 (this will be usefull to do cursor at first character after refresh)
+   }
+
+
 
 
   // useState with function form → only runs once
-  const [wordsArray, setWordsArray] = useState(() => generate(50));
+  const [wordsArray, setWordsArray] = useState(() => generate(50)); //this will generate words by library random words.
   const[currWordIndex, setcurrWordIndex] = useState(0); // to keep track of current word
   const[currCharIndex, setcurrCharIndex] = useState(0); // to keep track of current character
   const inputRef = useRef(null);
@@ -34,7 +62,7 @@ const TypingBox = () => {
 
 
     if(!testStart){    //Timer( to start the timer when user starts typing)
-      StartTimer();
+      StartTimer();    //see here when i start typing then test starts ans i set TestStart useState to true
       setTestStart(true);
     }
 
@@ -116,13 +144,17 @@ const TypingBox = () => {
      inputRef.current.focus();
   }
 
+  useEffect(()=>{           //Timer2(also here whenever testTime changes i had to setCountDown time value)
+      resetTest();
+  },[testTime])
+
   useEffect(() => {
     focusInput();   // Focus the input on component mount or page load
     wordsSpanRef[0].current.childNodes[0].className ='current'; // first character of first word ko current class de diya
   },[]);
    
   const wordsSpanRef = useMemo(() => {    // to create array of refs for each word
-    return Array(wordsArray.length).fill().map(i => createRef(null));  // creates array of refs jo ki wordsArray ke length ke barabar hoga AND YE TAB TAB MOUNT HOGA JAB WORDSARRAY CHANGE HOGA
+    return Array(wordsArray.length).fill().map(i => createRef(null));  // creates array of refs jo ki wordsArray ke length ke barabar hoga AND YE TAB TAB MOUNT HOGA JAB WORDSARRAY CHANGE HOGA and also see that i used map over there because to convert it to array as i can apply map to arrays
   },[wordsArray])
 
   return (
