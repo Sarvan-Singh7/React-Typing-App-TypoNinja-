@@ -4,8 +4,8 @@ export const GlobalStyle = createGlobalStyle`
 *{box-sizing : border-box;}
 
   body {
-    background-color: black;
-    color : white;
+    background-color:${({theme})=>theme.background}; /*ye theme App.js ke theme provider se ayi hai yahan*/
+    color : ${({theme}) => theme.textColor};
     margin :0;
     padding :0;
     transition : all 0.25s linear;
@@ -35,7 +35,8 @@ export const GlobalStyle = createGlobalStyle`
 .words{
     font-size: 32px;
     display: flex;
-    flex-wrap: wrap;  
+    flex-wrap: wrap; 
+    color : ${({theme}) => theme.typeBoxText} 
 }
 .word{
     margin:5px;
@@ -94,4 +95,12 @@ export const GlobalStyle = createGlobalStyle`
       color: green;
       cursor: pointer;
   }
+
+.footer{
+    display:flex;
+    flex-direction: column;
+    align-self: end;
+    
+    margin-left:auto;
+    
 `;

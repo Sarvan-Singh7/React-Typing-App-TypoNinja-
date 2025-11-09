@@ -2,13 +2,16 @@ import React from 'react';
 import App from './App';
 import ReactDOM from 'react-dom/client';
 import {TestModeContextProvider} from "./Context/TestModeContext"
+import {ThemeContextProvider} from "./Context/ThemeContext"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <TestModeContextProvider>  {/*see here that i wrap my app component under App so that every component of  a file can get acces to it */}
-        <App />
-    </TestModeContextProvider>
+    <ThemeContextProvider>    {/*see here i also impored ThemeCOntext to provide it to all */}
+        <TestModeContextProvider>  {/*see here that i wrap my app component under App so that every component of  a file can get acces to it */}
+            <App />
+        </TestModeContextProvider>
+    </ThemeContextProvider>
   </React.StrictMode>
 );
 

@@ -17,7 +17,7 @@ const TypingBox = () => {
     const intervalId = setInterval(timer, 1000);
     setIntervalId(intervalId);  //Timer2
     function timer(){
-      //setCountDown(CountDown - 1);   //this will stop after one time decrease as useState is asynchronous
+      //setCountDown(CountDown - 1);   //this will stop after one time decrease as useState is asynchronous so not used this
       setCountDown((latestCountDown)=>{   //i used function form of useState to get latest value of CountDown
         if(latestCountDown === 1){
           clearInterval(intervalId);
@@ -25,6 +25,7 @@ const TypingBox = () => {
           return 0;
         }
         return latestCountDown - 1;
+        
       })
     }
    }
@@ -38,6 +39,7 @@ const TypingBox = () => {
     setWordsArray(generate(50));
     resetWordsSpanRefClassname();
     focusInput();
+    
    }
 
    const resetWordsSpanRefClassname =()=>{ //Timer2 (this function will be used when to reset words on new mode )
@@ -62,7 +64,7 @@ const TypingBox = () => {
 
 
     if(!testStart){    //Timer( to start the timer when user starts typing)
-      StartTimer();    //see here when i start typing then test starts ans i set TestStart useState to true
+      StartTimer();    //see here when i start typing  then test starts ans i set TestStart useState to true
       setTestStart(true);
     }
 
