@@ -9,6 +9,7 @@ export const GlobalStyle = createGlobalStyle`
     margin :0;
     padding :0;
     transition : all 0.25s linear;
+    overflow-y: scroll;
   }
 
   .canvas{
@@ -36,6 +37,7 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 32px;
     display: flex;
     flex-wrap: wrap; 
+     align-content:center;
     color : ${({theme}) => theme.typeBoxText} 
 }
 .word{
@@ -50,11 +52,11 @@ export const GlobalStyle = createGlobalStyle`
     animation: blinkingLeft 2s infinite;
     animation-timing-function: ease;
     @keyframes blinkingLeft{
-        0% {border-left-color:white;}
-        25% {border-left-color:black;}
-        50% {border-left-color:white;}
-        75% {border-left-color:black;}
-        100% {border-left-color:white;}
+        0% {border-left-color:${({theme}) => theme.textColor};}
+        25% {border-left-color:${({theme}) => theme.background};}
+        50% {border-left-color:${({theme}) => theme.textColor};}
+        75% {border-left-color:${({theme}) => theme.background};}
+        100% {border-left-color:${({theme} )=> theme.textColor};}
     }
 }
 
@@ -63,15 +65,15 @@ export const GlobalStyle = createGlobalStyle`
     animation: blinkingRight 2s infinite;
     animation-timing-function: ease;
     @keyframes blinkingRight{
-        0% {border-right-color:white;}
-        25% {border-right-color:black;}
-        50% {border-right-color:white;}
-        75% {border-right-color:black;}
-        100% {border-right-color:white;}
+        0% {border-right-color:${({theme}) => theme.textColor};}   /*also make this work dynamic*/
+        25% {border-right-color:${({theme}) => theme.background};}
+        50% {border-right-color:${({theme}) => theme.textColor};}
+        75% {border-right-color:${({theme}) => theme.background};}
+        100% {border-right-color:${({theme}) => theme.textColor};}
     }
 }
 .correct{
-    color : green;  
+    color : ${({theme}) => theme.textColor };  
 }
 .incorrect{
     color : red;
@@ -102,5 +104,7 @@ export const GlobalStyle = createGlobalStyle`
     align-self: end;
     
     margin-left:auto;
+    margin-right:auto;
+}
     
 `;

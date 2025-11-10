@@ -4,8 +4,10 @@ import{useState, useContext} from 'react';
 const ThemeContext = createContext();
 
 export const ThemeContextProvider =({children}) => {
+                                                              //LOCAL STORAGE
+  const defaultValue = JSON.parse(localStorage.getItem('theme'))  ||   themeOptions[0].value   //see here if there will be not any localStorage so || ke baad wali accors and if local storage present so i have to parse(stringify to object) it to js for use .
 
-  const[theme,setTheme] = useState(themeOptions[0].value);
+  const[theme,setTheme] = useState(defaultValue);
 
   const values = {
     theme,
