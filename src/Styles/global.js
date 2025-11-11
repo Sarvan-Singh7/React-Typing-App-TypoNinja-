@@ -106,5 +106,9 @@ export const GlobalStyle = createGlobalStyle`
     margin-left:auto;
     margin-right:auto;
 }
+    .actual-footer{
+    display: flex;
+    justify-content: space-between;
+}
     
 `;

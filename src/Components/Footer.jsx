@@ -11,9 +11,10 @@ const Footer = () =>{             //THEME OPTIONS BY USER
      }
   return(
     <div className="footer">
+      <div className="actual-footer">
         <div className="links">
           Links
-        </div>
+        </div></div>
         <div className="themeButton">
           <Select                       //ye Select Component toh import kiya hai react-select npm se sara styles wagara le raha hai
               onChange={handleChange}    //this is a function work on new theme select

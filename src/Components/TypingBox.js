@@ -7,6 +7,12 @@ import { useTestMode } from '../Context/TestModeContext'
 
 const TypingBox = () => { 
 
+  const [correctChars, setCorrectChars] = useState(0);//===WPM
+  const [incorrectChars, setIncorrectChars] = useState(0);//===WPM
+  const [missedChars, setMissedChars] = useState(0);//===WPM
+  const [extraChars, setExtraChars] = useState(0); //===WPM
+  const [correctWords, setCorrectWords] =useState(0); //===WPM
+
    const{testTime} = useTestMode();  //TImer2 (this comes from UpperMenu after set as Context used so it may be 15,30 or 60, now i used this to apply in useEffect used below)
 
    const[CountDown, setCountDown] = useState(testTime); //Timer (Count Timer State as set testTime because it will come after modification from Uppermenu that what to set it)
@@ -60,6 +66,8 @@ const TypingBox = () => {
   const[currCharIndex, setcurrCharIndex] = useState(0); // to keep track of current character
   const inputRef = useRef(null);
 
+
+
   const handleUserInput=(e)=>{
 
 
@@ -101,12 +109,18 @@ const TypingBox = () => {
     
     if(e.keyCode ===32){
       // space key pressed
+      
+      let correctCharsInWord = wordsSpanRef[currWordIndex].current.querySelectorAll('.correct');//WPM(this will be return me spans of correct class which are present in wordSpanRef array )
+      if(correctCharsInWord == allCurrChars.length){
+        setCorrectWords(correctWords +1);    ///===WPM(check if all characters correct in a word then increase state)
+      }
 
-      if(allCurrChars.length <= currCharIndex){
+      if(allCurrChars.length <= currCharIndex){   //remove cursor from last place of a word
         allCurrChars[currCharIndex -1].classList.remove('right-current'); // remove right current class if space is pressed at end of word
       }
-      else{
+      else{   //remove cursor from in between of the word
         allCurrChars[currCharIndex].classList.remove('current'); // remove current class if space is pressed in between
+        setMissedChars(missedChars + allCurrChars.length - currCharIndex); ///===WPM (it is used to calculate in between words space entered so then count correct word.)
       }
       wordsSpanRef[currWordIndex+1].current.childNodes[0].className ='current'; // first character of next word ko current class de diya
       setcurrWordIndex(currWordIndex + 1); // move to next word
@@ -121,17 +135,18 @@ const TypingBox = () => {
       newSpan.className ='incorrect extra right-current'; // add incorrect and extra class to it
       allCurrChars[currCharIndex-1].classList.remove('right-current'); // remove right current class from previous character so now cursor can move also after this new character entered in word
       wordsSpanRef[currWordIndex].current.append(newSpan); // append this new span to the current word
-      
-      
-      
       setcurrCharIndex(currCharIndex + 1); // move to next character
+
+      setExtraChars(extraChars + 1);  //===WPM(calculating extra characters via spans count);
       return;
     }
 
     if(e.key === allCurrChars[currCharIndex].innerText){
       allCurrChars[currCharIndex].className ='correct'; // correct class add kar diya
+      setCorrectChars(correctChars +1);  //===WPM (calculating correct characters by  adding 1 o each)
     }else{
       allCurrChars[currCharIndex].className ='incorrect'; // incorrect class add kar diya
+      setIncorrectChars(incorrectChars + 1)  //===WPM()
     }
     if(currCharIndex+1 === allCurrChars.length){  //agar current character last character hai current word ka so move to next word
       allCurrChars[currCharIndex].className +=' right-current'; 
@@ -141,6 +156,13 @@ const TypingBox = () => {
 
     setcurrCharIndex(currCharIndex + 1);// move to next character
     
+  }
+
+  const calculateWPM = () => {   //===WPM(Give new WPM )
+       return Math.round((correctChars/5) / (testTime/60));
+  }
+  const calculateAcc = () => {    //===WPM(Give Accuracy in percentage)
+    return Math.round((correctWords / currWordIndex) * 100);
   }
   const focusInput = () =>{    //this focusInput function is to focus the hidden input when we click on the type-box or anywhere in the div
      inputRef.current.focus();
