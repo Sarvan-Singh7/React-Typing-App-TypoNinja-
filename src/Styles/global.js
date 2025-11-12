@@ -102,7 +102,7 @@ export const GlobalStyle = createGlobalStyle`
     display:flex;
     flex-direction: column;
     align-self: end;
-    
+    width :1000px;
     margin-left:auto;
     margin-right:auto;
 }
@@ -121,7 +121,7 @@ export const GlobalStyle = createGlobalStyle`
          width : 30%;
          padding: 30px;
      }
-    .rigth-width{
+    .right-stats{
     width: 70%;
     }
 

@@ -1,16 +1,23 @@
 import React from 'react'
-
+import Graph from './Graph'
 const Stats = (
   { wpm,
     accuracy,
     correctChars,
     incorrectChars,
     missedChars,
-    extraChars
+    extraChars,
+    graphData 
   }
 ) => {
 
-
+    let timeSet = new Set();   ///GRAPH (creater set so that i get unique value of time for graph)
+    const newGraph = graphData.filter(i => {
+      if(!timeSet.has(i[0])){
+        timeSet.add(i[0]);
+        return i;
+      }
+    })
   return(
        <div className="stats-box">
             <div className="left-stats">
@@ -24,6 +31,7 @@ const Stats = (
             </div>
             <div className="right-stats">
                  {/*Graph will go here */}
+                 <Graph graphData = {newGraph}/>
 
             </div>
        </div>

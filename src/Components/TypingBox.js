@@ -7,7 +7,7 @@ import Stats from './Stats';
 
 
 const TypingBox = () => { 
-
+  const [graphData, setGraphData] = useState([]);//===GRAPH
   const [correctChars, setCorrectChars] = useState(0);//===WPM
   const [incorrectChars, setIncorrectChars] = useState(0);//===WPM
   const [missedChars, setMissedChars] = useState(0);//===WPM
@@ -25,7 +25,19 @@ const TypingBox = () => {
     setIntervalId(intervalId);  //Timer2
     function timer(){
       //setCountDown(CountDown - 1);   //this will stop after one time decrease as useState is asynchronous so not used this
+
       setCountDown((latestCountDown)=>{   //i used function form of useState to get latest value of CountDown
+
+          setCorrectChars((correctChars) => {
+            setGraphData((graphData) => {
+              return [...graphData,[
+                testTime - latestCountDown +1,
+                (correctChars/5)/((testTime - latestCountDown +1)/60)
+              ]];
+            })
+            return correctChars;
+          })
+
         if(latestCountDown === 1){
           clearInterval(intervalId);
           setTestEnd(true);
@@ -192,6 +204,7 @@ const TypingBox = () => {
       incorrectChars = {incorrectChars}
       missedChars = {missedChars}
       extraChars = {extraChars}
+      graphData = {graphData}
 
       />
          ) : (<div className="type-box" onClick ={focusInput}>   {/* onClick calls focusInput function  because it needs to focus the hidden input */}
