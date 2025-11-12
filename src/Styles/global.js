@@ -110,5 +110,28 @@ export const GlobalStyle = createGlobalStyle`
     display: flex;
     justify-content: space-between;
 }
+    .stats-box{
+     display : flex;
+     width : 1000px;
+     height : auto;
+     margin-left: auto;
+     margin-right: auto;
+    }
+     .left-stats{
+         width : 30%;
+         padding: 30px;
+     }
+    .rigth-width{
+    width: 70%;
+    }
+
+    .title{
+        font-size: 20px;
+        color: ${({theme}) => theme.typeBoxText};
+        }
+
+    .subtitles{
+       font-size: 30px;
+    }
     
 `;

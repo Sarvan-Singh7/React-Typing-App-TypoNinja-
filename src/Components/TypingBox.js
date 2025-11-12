@@ -2,6 +2,7 @@ import React, { useState, useRef , useEffect ,useMemo, createRef} from 'react';
 import { generate } from 'random-words'; // generates random words
 import UpperMenu from './UpperMenu';
 import { useTestMode } from '../Context/TestModeContext'
+import Stats from './Stats';
 
 
 
@@ -184,7 +185,16 @@ const TypingBox = () => {
   return (
     <div>
       <UpperMenu countDown = {CountDown} />
-      {(testEnd) ? <h1>Test Ended</h1> : (<div className="type-box" onClick ={focusInput}>   {/* onClick calls focusInput function  because it needs to focus the hidden input */}
+      {(testEnd) ? (<Stats           //see that i passed  props to Stats component so that it can show data.
+      wpm = {calculateWPM()} 
+      accuracy = {calculateAcc()} 
+      correctChars = {correctChars} 
+      incorrectChars = {incorrectChars}
+      missedChars = {missedChars}
+      extraChars = {extraChars}
+
+      />
+         ) : (<div className="type-box" onClick ={focusInput}>   {/* onClick calls focusInput function  because it needs to focus the hidden input */}
         <div className="words">
           {wordsArray.map((word, index) => (
             <span className="word" key={index} ref={wordsSpanRef[index]}>
