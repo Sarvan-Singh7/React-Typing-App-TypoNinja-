@@ -1,7 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
 
-*{box-sizing : border-box;}
+*{box-sizing : border-box;
+margin :0;
+padding :0;
+// overflow-x: hidden;   this will be useful so that screen gets on its own position
+}
 
   body {
     background-color:${({theme})=>theme.background}; /*ye theme App.js ke theme provider se ayi hai yahan*/
@@ -99,12 +103,18 @@ export const GlobalStyle = createGlobalStyle`
   }
 
 .footer{
-    display:flex;
-    flex-direction: column;
+    // display:flex;          //THIS IS A OLD CSS
+    // flex-direction: column;
     align-self: end;
+    // width :1000px;
+    // margin-left:auto;
+    // margin-right:auto;
+    display: flex;
+    justify-content: space-between;
     width :1000px;
     margin-left:auto;
     margin-right:auto;
+
 }
     .actual-footer{
     display: flex;
@@ -133,5 +143,12 @@ export const GlobalStyle = createGlobalStyle`
     .subtitles{
        font-size: 30px;
     }
+
+   .header{
+    display: flex;
+    justify-content: space-between;
+    width :1000px;
+    margin-left:auto;
+    margin-right:auto;}
     
 `;

@@ -4,6 +4,7 @@ import TypingBox from './Components/TypingBox';
 import Footer from './Components/Footer';
 import { useTheme } from './Context/ThemeContext'
 import {ThemeProvider} from 'styled-components'   //imported themeProvider
+import Header from './Components/Header';
 
 function App() {
   const {theme} = useTheme();  // see that i used Context ki thems and used below
@@ -14,7 +15,7 @@ function App() {
         
         <div className="canvas">
            <GlobalStyle />              {/*Coming from global.js  = css */}
-          <div>Header</div>
+          <Header/>
           <TypingBox />
           <Footer/>
         </div>
