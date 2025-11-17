@@ -9,6 +9,7 @@ const Stats = (
     extraChars,
     graphData 
   }
+  
 ) => {
 
     let timeSet = new Set();   ///GRAPH (creater set so that i get unique value of time for graph)
@@ -18,6 +19,7 @@ const Stats = (
         return i;
       }
     })
+
   return(
        <div className="stats-box">
             <div className="left-stats">
