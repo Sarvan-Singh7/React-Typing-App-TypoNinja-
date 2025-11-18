@@ -1,6 +1,6 @@
-import firebase from 'firebase/app';  //install firebase package first
-import 'firebase/auth';
-import 'firebase/firestore';
+import firebase from 'firebase/compat/app';  //install firebase package first
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 const firebaseConfig = {     // Your web app's Firebase configuration
   apiKey: "AIzaSyCblkUAC11dfwjhDjiZUhCcf-o1tPMFaTU",
