@@ -1,5 +1,8 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Graph from './Graph'
+import { db,auth } from '../firebaseConfig';
+import { toast, Bounce } from 'react-toastify';
+
 const Stats = (
   { wpm,
     accuracy,
@@ -19,6 +22,77 @@ const Stats = (
         return i;
       }
     })
+
+    const pushDataToDB = () => {   //reference to results collection in firebase and this function will push data to firebase
+      if(isNaN(accuracy) || isNaN(wpm)){   //like if i typed not a full word so accuracy or wpm will be nan and i will not push that data to db
+        toast.error('Invalid Test', {
+         position: "top-right",
+         autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+            draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+      });
+        return;   //if accuracy or wpm is nan then we will not push data to db
+      }
+      const resultsRef = db.collection('Results');
+      const {uid} = auth.currentUser;  //as each user is unique we will store data according to uid
+      resultsRef.add({
+        wpm : wpm,
+        accuracy : accuracy,
+        timeStamp : new Date(),
+        Characters: `${correctChars}/${incorrectChars}/${missedChars}/${extraChars}`,
+        userId : uid,//to identify which user this data belongs to
+      }).then((res) => {
+        toast.success('Data Saved To DB', {
+         position: "top-right",
+         autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+            draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+      });
+      }).catch((err) => {
+        toast.error('Not Able To save Result', {
+         position: "top-right",
+         autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+            draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+      });
+      })
+    }
+
+    useEffect(() => {
+     if(auth.currentUser){   //only if user is logged in we will push data to db
+        pushDataToDB();
+     }
+     else{
+        toast.warning('Login TO save Result', {
+         position: "top-right",
+         autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+            draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+      });
+     }
+    },[])
+
+
 
   return(
        <div className="stats-box">
