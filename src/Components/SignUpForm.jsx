@@ -4,7 +4,7 @@ import { useTheme } from '../Context/ThemeContext';
 import {auth} from '../firebaseConfig';
 import { toast, Bounce } from 'react-toastify';
 import errorMapping from '../Utils/errorMapping';
-const SignUpForm = () => {
+const SignUpForm = ({handleClose}) => {
 
    const[email, setEmail] = useState('');
    const[password, setPassword] = useState('');
@@ -54,6 +54,7 @@ const SignUpForm = () => {
           theme: "dark",
           transition: Bounce,
       });
+      handleClose();  //to close the modal on successful signup
     }).catch((err) =>{    //in this err we will get firebase error code like auth/user-not-found etc
        toast.error(errorMapping[err.code] || 'some Error Occured', {
          position: "top-right",

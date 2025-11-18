@@ -12,7 +12,6 @@ const Stats = (
     extraChars,
     graphData 
   }
-  
 ) => {
 
     let timeSet = new Set();   ///GRAPH (creater set so that i get unique value of time for graph)
@@ -23,6 +22,7 @@ const Stats = (
       }
     })
 
+
     const pushDataToDB = () => {   //reference to results collection in firebase and this function will push data to firebase
       if(isNaN(accuracy) || isNaN(wpm)){   //like if i typed not a full word so accuracy or wpm will be nan and i will not push that data to db
         toast.error('Invalid Test', {
@@ -31,13 +31,14 @@ const Stats = (
           hideProgressBar: false,
           closeOnClick: false,
           pauseOnHover: true,
-            draggable: true,
+          draggable: true,
           progress: undefined,
           theme: "dark",
           transition: Bounce,
       });
         return;   //if accuracy or wpm is nan then we will not push data to db
       }
+
       const resultsRef = db.collection('Results');
       const {uid} = auth.currentUser;  //as each user is unique we will store data according to uid
       resultsRef.add({
@@ -53,7 +54,7 @@ const Stats = (
           hideProgressBar: false,
           closeOnClick: false,
           pauseOnHover: true,
-            draggable: true,
+          draggable: true,
           progress: undefined,
           theme: "dark",
           transition: Bounce,
@@ -65,7 +66,7 @@ const Stats = (
           hideProgressBar: false,
           closeOnClick: false,
           pauseOnHover: true,
-            draggable: true,
+          draggable: true,
           progress: undefined,
           theme: "dark",
           transition: Bounce,
@@ -91,8 +92,6 @@ const Stats = (
       });
      }
     },[])
-
-
 
   return(
        <div className="stats-box">

@@ -4,7 +4,7 @@ import { useTheme } from '../Context/ThemeContext';
 import {auth} from '../firebaseConfig';
 import { toast, Bounce } from 'react-toastify';
 import errorMapping from '../Utils/errorMapping';
-const LoginForm = () => {
+const LoginForm = ({handleClose}) => {
 
    const[email, setEmail] = useState('');
    const[password, setPassword] = React .useState('');
@@ -37,6 +37,7 @@ const LoginForm = () => {
           theme: "dark",
           transition: Bounce,
       });
+      handleClose();  //to close the modal on successful login
     }).catch((err) =>{
         toast.error(errorMapping[err.code] || 'some Error Occured', {
          position: "top-right",

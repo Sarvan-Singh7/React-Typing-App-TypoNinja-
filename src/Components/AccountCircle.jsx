@@ -9,14 +9,23 @@ import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { toast, Bounce } from 'react-toastify';
 import errorMapping from '../Utils/errorMapping';
 import { auth } from '../firebaseConfig';
+import UserPage from '../Pages/UserPage';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';   //hook to navigate programmatically
 
 const AccountCircle = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0); // to keep track of which tab is selected either login or signup
   const { theme } = useTheme();
-
+  const navigate = useNavigate();
+  const [user] = useAuthState(auth);   //[firebase hook] to check if user is logged in or not destructure as array as useAuthState returns an array
   const handleModalOpen = () => {
-    setOpen(true);
+    if(user){   //if user is already logged in then do not open modal on clicking account icon
+      navigate('/user');  //navigate to user page
+    }
+    else{setOpen(true);}
+    
   };
   const handleClose = () => {
     setOpen(false);
@@ -24,6 +33,33 @@ const AccountCircle = () => {
   const handleValueChange = (e, v) => {
     setValue(v);
   };
+  const logout = () => {                     //logout function to logout user
+    auth.signOut().then((res) => {
+      toast.success('Logged Out', {
+               position: "top-right",
+               autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                  draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Bounce,
+            });
+    }).catch((err) => {
+      toast.error('Not able to Logout', {
+         position: "top-right",
+         autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+            draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+      });
+    })
+  }
 
   const googleProvider = new GoogleAuthProvider(); // we need to create an instance of GoogleAuthProvider class to use google sign in
   const handleGoogleSignIn = () => {
@@ -60,6 +96,8 @@ const AccountCircle = () => {
   return (
     <div>
       <AccountCircleIcon onClick={handleModalOpen} />
+      {(user) && <LogoutIcon onClick={logout} />}  {/* if user is logged in then show logout icon  otherwise show account circle icon only*/}
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -76,8 +114,8 @@ const AccountCircle = () => {
               <Tab label="Signup" style={{ color: theme.textColor }} />
             </Tabs>
           </AppBar>
-          {value === 0 && <LoginForm />}
-          {value === 1 && <SignUpForm />}
+          {value === 0 && <LoginForm handleClose={handleClose} />}
+          {value === 1 && <SignUpForm handleClose={handleClose} />}
           <Box>
             <span>OR</span>
             <GoogleButton
