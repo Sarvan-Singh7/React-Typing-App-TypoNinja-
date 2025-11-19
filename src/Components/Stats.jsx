@@ -45,7 +45,7 @@ const Stats = (
         wpm : wpm,
         accuracy : accuracy,
         timeStamp : new Date(),
-        Characters: `${correctChars}/${incorrectChars}/${missedChars}/${extraChars}`,
+        characters: `${correctChars}/${incorrectChars}/${missedChars}/${extraChars}`,
         userId : uid,//to identify which user this data belongs to
       }).then((res) => {
         toast.success('Data Saved To DB', {

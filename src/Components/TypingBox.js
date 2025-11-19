@@ -174,9 +174,11 @@ const TypingBox = () => {
   const calculateWPM = () => {   //===WPM(Give new WPM )
        return Math.round((correctChars/5) / (testTime/60));
   }
-  const calculateAcc = () => {    //===WPM(Give Accuracy in percentage)
-    return Math.round((correctWords / currWordIndex) * 100);
-  }
+  const calculateAcc = () => {
+  const totalTyped = correctChars + incorrectChars + missedChars + extraChars;
+  if (totalTyped === 0) return 0;
+  return Math.round((correctChars / totalTyped) * 100);
+};
   const focusInput = () =>{    //this focusInput function is to focus the hidden input when we click on the type-box or anywhere in the div
      inputRef.current.focus();
   }
