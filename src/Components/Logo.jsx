@@ -6,7 +6,7 @@ const Logo = () => {
   const { theme } = useTheme(); // dynamic theme
 
   const refreshApp = () => {
-    window.location.reload();   // 🔥 Full application reload
+    window.location.reload();   //  Full application reload
   };
 
   return (
