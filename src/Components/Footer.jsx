@@ -2,6 +2,8 @@ import React ,{useState} from 'react';
 import Select from 'react-select';
 import { themeOptions } from '../Utils/themeOptions'
 import { useTheme } from '../Context/ThemeContext'
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 const Footer = () =>{             //THEME OPTIONS BY USER
      const {setTheme,theme} = useTheme();            //theme as set by user
      const handleChange = (e) =>{              //this function will be handling user-input on theme
@@ -9,8 +11,12 @@ const Footer = () =>{             //THEME OPTIONS BY USER
         setTheme(e.value);                //i wrap all set to handleChange
         localStorage.setItem("theme", JSON.stringify(e.value));  //LOCAL STORAGE FOR THEMES should be stringify to convert e.value which was in js object to  JSON-formatted string
      }
+     
   return(
     <div className="footer">
+
+      
+
       <div className="actual-footer">
         <div className="links">
           Links

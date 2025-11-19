@@ -6,11 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 import TableUserData from '../Components/TableUserData';
 import Graph from '../Components/Graph';
+import UserInfo from '../Components/UserInfo';
+
 
 const UserPage = () => {
 
    const[data, setData] =useState([]);
    const[user, loading] = useAuthState(auth);             //to get current logged in user real time
+   const [dataLoading, setDataLoading] = useState(true);  //state to check if data is loading from firebase or not
    const navigate = useNavigate();
    const [graphData, setGraphData] = useState([]);       //state to hold graph data WPM vs Time
    
@@ -28,6 +31,7 @@ const UserPage = () => {
         });
         setData(tempData);
         setGraphData(tempGraphData.reverse());  //as we want graph data in ascending order of time so reversing it
+        setDataLoading(false);
       });
    };
    
@@ -40,13 +44,19 @@ const UserPage = () => {
      }
    },[loading])
 
-     if(loading){
-      return <CircularProgress />;
+     if(loading || dataLoading){   //while firebase is loading user data show loading spinner
+      return <div className="center-of-screen">
+        <CircularProgress  size ={300}/>
+      </div>;
      }
 
   return(
     <div className="canvas">
-      <Graph graphData={graphData} type ='date'/>
+      <UserInfo totalTestsTaken={data.length}/>       {/*component to show user info like name,email*/}
+      <div className="graph-user-page">
+        <Graph graphData={graphData} type ='date'/>
+      </div>
+      
       <TableUserData data={data}/>
     </div>
   )

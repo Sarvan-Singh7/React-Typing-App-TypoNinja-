@@ -4,7 +4,7 @@ export const GlobalStyle = createGlobalStyle`
 *{box-sizing : border-box;
 margin :0;
 padding :0;
-// overflow-x: hidden;   this will be useful so that screen gets on its own position
+ overflow-x: hidden;   this will be useful so that screen gets on its own position
 }
 
   body {
@@ -150,5 +150,56 @@ padding :0;
     width :1000px;
     margin-left:auto;
     margin-right:auto;}
-    
+
+    .user-profile{
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    min-height: 15rem;
+    background: ${({theme})=>theme.typeBoxText};
+    color: ${({theme})=>theme.background};
+    border-radius: 20px;
+    justify-content: center;
+    align-text: center;
+}
+
+.user{
+    width: 50%;
+    display: flex;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+    padding: 1rem;
+    // border-right: 2px solid;   used to add line between info and picture
+    // border-color: ${({theme}) => theme.background};
+}
+
+.info{
+    width: 60%;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+.picture{
+    width: 40%;
+}
+.total-tests{
+    width: 50%;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  .graph-user-page, .table{
+    width: 1000px;
+    margin: auto;
+}  
+
+  .center-of-screen{
+    display:flex;
+    min-height:100vh;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 3rem;
+}
 `;

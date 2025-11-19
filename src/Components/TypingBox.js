@@ -82,7 +82,7 @@ const TypingBox = () => {
 
 
   const handleUserInput=(e)=>{
-
+     if (testEnd) return;   // if test has ended then do not process any input
 
     if(!testStart){    //Timer( to start the timer when user starts typing)
       StartTimer();    //see here when i start typing  then test starts ans i set TestStart useState to true
