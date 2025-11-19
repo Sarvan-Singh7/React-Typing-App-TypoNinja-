@@ -4,7 +4,7 @@ export const GlobalStyle = createGlobalStyle`
 *{box-sizing : border-box;
 margin :0;
 padding :0;
- overflow-x: hidden;   this will be useful so that screen gets on its own position
+ //overflow-x: hidden;   this will be useful so that screen gets on its own position
 }
 
   body {
@@ -13,7 +13,7 @@ padding :0;
     margin :0;
     padding :0;
     transition : all 0.25s linear;
-    overflow-y: scroll;
+   // overflow-y: scroll;
   }
 
   .canvas{

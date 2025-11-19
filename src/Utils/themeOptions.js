@@ -1,8 +1,8 @@
 
 const superUserTheme = {
     label: 'Super User',     /*label is used to acces that full object and value is name of the object */
-    background: '#262A33',
-    textColor: '#ffffffff',
+    background: '#101820',
+    textColor: '#10e98bff',
     typeBoxText: '#526777'
 }
 

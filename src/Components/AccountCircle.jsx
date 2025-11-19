@@ -95,8 +95,9 @@ const AccountCircle = () => {
 
   return (
     <div>
-      <AccountCircleIcon onClick={handleModalOpen} />
-      {(user) && <LogoutIcon onClick={logout} />}  {/* if user is logged in then show logout icon  otherwise show account circle icon only*/}
+      <AccountCircleIcon style = {{cursor: 'pointer'}}
+      onClick={handleModalOpen} />
+      {(user) && <LogoutIcon onClick={logout} style = {{cursor: 'pointer'}}/>}  {/* if user is logged in then show logout icon  otherwise show account circle icon only*/}
 
       <Modal
         open={open}

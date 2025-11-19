@@ -1,0 +1,25 @@
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.logo-icon {
+  width: 42px;
+  height: 42px;
+  transition: transform 0.2s ease;
+}
+
+.logo-container:hover .logo-icon {
+  transform: scale(1.08);
+}
+
+.logo-text {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-family: "Poppins", sans-serif;
+  /* ⛔ REMOVE color: #43FFAF; */
+}
