@@ -72,94 +72,192 @@ const TypingBox = () => {
   const [currWordIndex, setcurrWordIndex] = useState(0); // to keep track of current word
   const [currCharIndex, setcurrCharIndex] = useState(0); // to keep track of current character
   const inputRef = useRef(null);
+  const [currentInput, setCurrentInput] = useState(''); // For mobile input tracking
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0; // Detect touch devices
 
   const handleUserInput = (e) => {
-    if (testEnd) return;   // if test has ended then do not process any input
+    if (testEnd) return;
 
-    if (!testStart) {    //Timer( to start the timer when user starts typing)
-      StartTimer();    //see here when i start typing  then test starts ans i set TestStart useState to true
+    if (!testStart) {
+      StartTimer();
       setTestStart(true);
     }
 
-    const allCurrChars = wordsSpanRef[currWordIndex].current.childNodes; //array created to hold all characters of current word 
+    const allCurrChars = wordsSpanRef[currWordIndex].current.childNodes;
     if (e.keyCode === 8) {
-      // backspace key pressed
-      if (currCharIndex === 0) return; // if we are at starting of word and backspace is pressed then simply return
+      if (currCharIndex === 0) return;
       if (currCharIndex != 0) {
         if (allCurrChars.length === currCharIndex) {
-          if (allCurrChars[currCharIndex - 1].className.includes('extra')) { // if there is an extra character and backspace is pressed then remove that extra character
+          if (allCurrChars[currCharIndex - 1].className.includes('extra')) {
             allCurrChars[currCharIndex - 1].remove();
-            allCurrChars[currCharIndex - 2].className += ' right-current'; // give right current class to previous character
+            allCurrChars[currCharIndex - 2].className += ' right-current';
           } else {
-            allCurrChars[currCharIndex - 1].className = 'current'; // if we are at end of word and backspace is pressed then simply move cursor to last character
+            allCurrChars[currCharIndex - 1].className = 'current';
           }
           setcurrCharIndex(currCharIndex - 1);
           return;
         }
 
-        allCurrChars[currCharIndex].className = ''; // remove current class from current character as now not incorrect nor correct
-        allCurrChars[currCharIndex - 1].className = 'current'; // previous character ko current class de diya ys hmne cursor ko wapis piche le jane ke liye
-        setcurrCharIndex(currCharIndex - 1); // move back to previous character
+        allCurrChars[currCharIndex].className = '';
+        allCurrChars[currCharIndex - 1].className = 'current';
+        setcurrCharIndex(currCharIndex - 1);
       }
       return;
     }
 
     if (e.keyCode === 32) {
-      // space key pressed
-      let correctCharsInWord = wordsSpanRef[currWordIndex].current.querySelectorAll('.correct');//WPM(this will be return me spans of correct class which are present in wordSpanRef array )
+      let correctCharsInWord = wordsSpanRef[currWordIndex].current.querySelectorAll('.correct');
       if (correctCharsInWord.length === allCurrChars.length) {
-        setCorrectWords(correctWords + 1);    ///===WPM(check if all characters correct in a word then increase state)
+        setCorrectWords(correctWords + 1);
       }
 
-      if (allCurrChars.length <= currCharIndex) {   //remove cursor from last place of a word
-        allCurrChars[currCharIndex - 1].classList.remove('right-current'); // remove right current class if space is pressed at end of word
+      if (allCurrChars.length <= currCharIndex) {
+        allCurrChars[currCharIndex - 1].classList.remove('right-current');
       }
-      else {   //remove cursor from in between of the word
-        allCurrChars[currCharIndex].classList.remove('current'); // remove current class if space is pressed in between
-        setMissedChars(missedChars + allCurrChars.length - currCharIndex); ///===WPM (it is used to calculate in between words space entered so then count correct word.)
+      else {
+        allCurrChars[currCharIndex].classList.remove('current');
+        setMissedChars(missedChars + allCurrChars.length - currCharIndex);
       }
 
-      // SCROLLING LOGIC
       if (wordsSpanRef[currWordIndex + 1]) {
         if (wordsSpanRef[currWordIndex + 1].current.offsetLeft < wordsSpanRef[currWordIndex].current.offsetLeft) {
-          // If the next word is on a new line (its left offset is smaller than current word's left offset)
           wordsSpanRef[currWordIndex + 1].current.scrollIntoView({ block: 'center', behavior: 'smooth' });
         }
-        wordsSpanRef[currWordIndex + 1].current.childNodes[0].className = 'current'; // first character of next word ko current class de diya
-        setcurrWordIndex(currWordIndex + 1); // move to next word
-        setcurrCharIndex(0); // reset character index to 0
+        wordsSpanRef[currWordIndex + 1].current.childNodes[0].className = 'current';
+        setcurrWordIndex(currWordIndex + 1);
+        setcurrCharIndex(0);
       } else {
-        // User has completed all words - end the test
         clearInterval(intervalId);
         setTestEnd(true);
       }
       return;
     }
 
-    if (currCharIndex === allCurrChars.length) {  // if current character index is equal to length of current word that means user is trying to type more characters than present in the word
-      let newSpan = document.createElement('span'); // create a new span element
-      newSpan.innerText = e.key; // set its text to the pressed key
-      newSpan.className = 'incorrect extra right-current'; // add incorrect and extra class to it
-      allCurrChars[currCharIndex - 1].classList.remove('right-current'); // remove right current class from previous character so now cursor can move also after this new character entered in word
-      wordsSpanRef[currWordIndex].current.append(newSpan); // append this new span to the current word
-      setcurrCharIndex(currCharIndex + 1); // move to next character
-      setExtraChars(extraChars + 1);  //===WPM(calculating extra characters via spans count);
+    if (currCharIndex === allCurrChars.length) {
+      let newSpan = document.createElement('span');
+      newSpan.innerText = e.key;
+      newSpan.className = 'incorrect extra right-current';
+      allCurrChars[currCharIndex - 1].classList.remove('right-current');
+      wordsSpanRef[currWordIndex].current.append(newSpan);
+      setcurrCharIndex(currCharIndex + 1);
+      setExtraChars(extraChars + 1);
       return;
     }
 
     if (e.key === allCurrChars[currCharIndex].innerText) {
-      allCurrChars[currCharIndex].className = 'correct'; // correct class add kar diya
-      setCorrectChars(correctChars + 1);  //===WPM (calculating correct characters by  adding 1 o each)
+      allCurrChars[currCharIndex].className = 'correct';
+      setCorrectChars(correctChars + 1);
     } else {
-      allCurrChars[currCharIndex].className = 'incorrect'; // incorrect class add kar diya
-      setIncorrectChars(incorrectChars + 1)  //===WPM()
+      allCurrChars[currCharIndex].className = 'incorrect';
+      setIncorrectChars(incorrectChars + 1)
     }
-    if (currCharIndex + 1 === allCurrChars.length) {  //agar current character last character hai current word ka so move to next word
+    if (currCharIndex + 1 === allCurrChars.length) {
       allCurrChars[currCharIndex].className += ' right-current';
-    } else {                                        //agar last character nahi hai to simply move to next character matlb ki ek word ke kissi letter pe agar space press karte hai to next letter pe chala jaye
+    } else {
       allCurrChars[currCharIndex + 1].className = 'current';
     }
-    setcurrCharIndex(currCharIndex + 1);// move to next character
+    setcurrCharIndex(currCharIndex + 1);
+  }
+
+  // Mobile input handler
+  const handleMobileInput = (e) => {
+    if (testEnd) return;
+
+    if (!testStart) {
+      StartTimer();
+      setTestStart(true);
+    }
+
+    const value = e.target.value;
+    const expectedWord = wordsArray[currWordIndex];
+
+    // Handle backspace/deletion
+    if (value.length < currentInput.length) {
+      const allCurrChars = wordsSpanRef[currWordIndex].current.childNodes;
+      if (currCharIndex === 0) return;
+
+      if (allCurrChars.length === currCharIndex) {
+        if (allCurrChars[currCharIndex - 1].className.includes('extra')) {
+          allCurrChars[currCharIndex - 1].remove();
+          if (currCharIndex >= 2) {
+            allCurrChars[currCharIndex - 2].className += ' right-current';
+          }
+        } else {
+          allCurrChars[currCharIndex - 1].className = 'current';
+        }
+      } else {
+        allCurrChars[currCharIndex].className = '';
+        allCurrChars[currCharIndex - 1].className = 'current';
+      }
+      setcurrCharIndex(currCharIndex - 1);
+      setCurrentInput(value);
+      return;
+    }
+
+    // Handle space (move to next word)
+    if (value.endsWith(' ')) {
+      const allCurrChars = wordsSpanRef[currWordIndex].current.childNodes;
+      let correctCharsInWord = wordsSpanRef[currWordIndex].current.querySelectorAll('.correct');
+      if (correctCharsInWord.length === allCurrChars.length) {
+        setCorrectWords(correctWords + 1);
+      }
+
+      if (allCurrChars.length <= currCharIndex) {
+        allCurrChars[currCharIndex - 1].classList.remove('right-current');
+      } else {
+        allCurrChars[currCharIndex].classList.remove('current');
+        setMissedChars(missedChars + allCurrChars.length - currCharIndex);
+      }
+
+      if (wordsSpanRef[currWordIndex + 1]) {
+        if (wordsSpanRef[currWordIndex + 1].current.offsetLeft < wordsSpanRef[currWordIndex].current.offsetLeft) {
+          wordsSpanRef[currWordIndex + 1].current.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        }
+        wordsSpanRef[currWordIndex + 1].current.childNodes[0].className = 'current';
+        setcurrWordIndex(currWordIndex + 1);
+        setcurrCharIndex(0);
+      } else {
+        clearInterval(intervalId);
+        setTestEnd(true);
+      }
+
+      setCurrentInput('');
+      e.target.value = '';
+      return;
+    }
+
+    // Handle character input
+    const newChar = value[value.length - 1];
+    const allCurrChars = wordsSpanRef[currWordIndex].current.childNodes;
+
+    if (currCharIndex === allCurrChars.length) {
+      // Extra characters
+      let newSpan = document.createElement('span');
+      newSpan.innerText = newChar;
+      newSpan.className = 'incorrect extra right-current';
+      allCurrChars[currCharIndex - 1].classList.remove('right-current');
+      wordsSpanRef[currWordIndex].current.append(newSpan);
+      setcurrCharIndex(currCharIndex + 1);
+      setExtraChars(extraChars + 1);
+    } else {
+      // Normal character
+      if (newChar === allCurrChars[currCharIndex].innerText) {
+        allCurrChars[currCharIndex].className = 'correct';
+        setCorrectChars(correctChars + 1);
+      } else {
+        allCurrChars[currCharIndex].className = 'incorrect';
+        setIncorrectChars(incorrectChars + 1);
+      }
+
+      if (currCharIndex + 1 === allCurrChars.length) {
+        allCurrChars[currCharIndex].className += ' right-current';
+      } else {
+        allCurrChars[currCharIndex + 1].className = 'current';
+      }
+      setcurrCharIndex(currCharIndex + 1);
+    }
+
+    setCurrentInput(value);
   }
 
   const calculateWPM = () => {   //===WPM(Give new WPM )
@@ -216,7 +314,9 @@ const TypingBox = () => {
       </div>)}  {/* Timer(see that i used condition in this box )*/}
       <input
         type="text"
-        onKeyDown={handleUserInput}
+        value={isTouchDevice ? currentInput : undefined}
+        onKeyDown={!isTouchDevice ? handleUserInput : undefined}
+        onInput={isTouchDevice ? handleMobileInput : undefined}
         className="hidden-input"
         ref={inputRef}
       />
