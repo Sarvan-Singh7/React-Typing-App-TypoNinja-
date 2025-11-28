@@ -8,8 +8,8 @@ padding :0;
 }
 
   body {
-    background-color:${({theme})=>theme.background}; /*ye theme App.js ke theme provider se ayi hai yahan*/
-    color : ${({theme}) => theme.textColor};
+    background-color:${({ theme }) => theme.background}; /*ye theme App.js ke theme provider se ayi hai yahan*/
+    color : ${({ theme }) => theme.textColor};
     margin :0;
     padding :0;
     transition : all 0.25s linear;
@@ -31,6 +31,7 @@ padding :0;
 .type-box{
     display:block;
     max-width: 1000px;
+    width: 90%;
     height: 140px;
     margin-left:auto;
     margin-right:auto;
@@ -42,7 +43,7 @@ padding :0;
     display: flex;
     flex-wrap: wrap; 
      align-content:center;
-    color : ${({theme}) => theme.typeBoxText} 
+    color : ${({ theme }) => theme.typeBoxText} 
 }
 .word{
     margin:5px;
@@ -56,11 +57,11 @@ padding :0;
     animation: blinkingLeft 2s infinite;
     animation-timing-function: ease;
     @keyframes blinkingLeft{
-        0% {border-left-color:${({theme}) => theme.textColor};}
-        25% {border-left-color:${({theme}) => theme.background};}
-        50% {border-left-color:${({theme}) => theme.textColor};}
-        75% {border-left-color:${({theme}) => theme.background};}
-        100% {border-left-color:${({theme} )=> theme.textColor};}
+        0% {border-left-color:${({ theme }) => theme.textColor};}
+        25% {border-left-color:${({ theme }) => theme.background};}
+        50% {border-left-color:${({ theme }) => theme.textColor};}
+        75% {border-left-color:${({ theme }) => theme.background};}
+        100% {border-left-color:${({ theme }) => theme.textColor};}
     }
 }
 
@@ -69,15 +70,15 @@ padding :0;
     animation: blinkingRight 2s infinite;
     animation-timing-function: ease;
     @keyframes blinkingRight{
-        0% {border-right-color:${({theme}) => theme.textColor};}   /*also make this work dynamic*/
-        25% {border-right-color:${({theme}) => theme.background};}
-        50% {border-right-color:${({theme}) => theme.textColor};}
-        75% {border-right-color:${({theme}) => theme.background};}
-        100% {border-right-color:${({theme}) => theme.textColor};}
+        0% {border-right-color:${({ theme }) => theme.textColor};}   /*also make this work dynamic*/
+        25% {border-right-color:${({ theme }) => theme.background};}
+        50% {border-right-color:${({ theme }) => theme.textColor};}
+        75% {border-right-color:${({ theme }) => theme.background};}
+        100% {border-right-color:${({ theme }) => theme.textColor};}
     }
 }
 .correct{
-    color : ${({theme}) => theme.textColor };  
+    color : ${({ theme }) => theme.textColor};  
 }
 .incorrect{
     color : red;
@@ -85,7 +86,8 @@ padding :0;
 
 .upperMenu{     
   display : flex;
-  width :1000px;
+  max-width :1000px;
+  width: 90%;
   margin-left:auto;
   margin-right: auto;
   justify-content: space-between;  /*by this 15 side mein and options to choose time ek side pe*/
@@ -111,7 +113,8 @@ padding :0;
     // margin-right:auto;
     display: flex;
     justify-content: space-between;
-    width :1000px;
+    max-width :1000px;
+    width: 90%;
     margin-left:auto;
     margin-right:auto;
 
@@ -122,7 +125,8 @@ padding :0;
 }
     .stats-box{
      display : flex;
-     width : 1000px;
+     max-width : 1000px;
+     width: 90%;
      height : auto;
      margin-left: auto;
      margin-right: auto;
@@ -137,7 +141,7 @@ padding :0;
 
     .title{
         font-size: 20px;
-        color: ${({theme}) => theme.typeBoxText};
+        color: ${({ theme }) => theme.typeBoxText};
         }
 
     .subtitles{
@@ -147,17 +151,19 @@ padding :0;
    .header{
     display: flex;
     justify-content: space-between;
-    width :1000px;
+    max-width :1000px;
+    width: 90%;
     margin-left:auto;
     margin-right:auto;}
 
     .user-profile{
-    width: 1000px;
+    max-width: 1000px;
+    width: 90%;
     margin: auto;
     display: flex;
     min-height: 15rem;
-    background: ${({theme})=>theme.typeBoxText};
-    color: ${({theme})=>theme.background};
+    background: ${({ theme }) => theme.typeBoxText};
+    color: ${({ theme }) => theme.background};
     border-radius: 20px;
     justify-content: center;
     align-text: center;
@@ -171,7 +177,7 @@ padding :0;
     font-size: 1.5rem;
     padding: 1rem;
     // border-right: 2px solid;   used to add line between info and picture
-    // border-color: ${({theme}) => theme.background};
+    // border-color: ${({ theme }) => theme.background};
 }
 
 .info{
@@ -190,7 +196,8 @@ padding :0;
     align-items: center;
 }
   .graph-user-page, .table{
-    width: 1000px;
+    max-width: 1000px;
+    width: 90%;
     margin: auto;
 }  
 
@@ -200,6 +207,53 @@ padding :0;
     justify-content: center;
     align-items: center;
     text-align: center;
+    text-align: center;
     font-size: 3rem;
+}
+
+@media (max-width: 768px) {
+    .words {
+        font-size: 1.5rem;
+    }
+    .upperMenu {
+        font-size: 1rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    .modes {
+        gap: 0.5rem;
+    }
+    .footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    .stats-box {
+        flex-direction: column;
+        height: auto;
+    }
+    .left-stats, .right-stats {
+        width: 100%;
+        padding: 10px;
+    }
+    .user-profile {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        padding: 1rem;
+    }
+    .user, .total-tests {
+        width: 100%;
+        margin: 10px 0;
+        border: none;
+    }
+    .info, .picture {
+        width: 100%;
+        text-align: center;
+    }
+    .center-of-screen {
+        font-size: 2rem;
+    }
 }
 `;
