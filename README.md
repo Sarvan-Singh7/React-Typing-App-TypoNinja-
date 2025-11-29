@@ -1,13 +1,12 @@
-# 🚀 TypoNinja
+# 🥷 TypoNinja
 
-TypoNinja is a typing practice website I built with my team because we were tired of old, boring typing tools.  
-We wanted something modern, fast, clean, and actually helpful — so we created TypoNinja.
+TypoNinja is a typing practice website I built to sharpen my skills and explore how modern typing platforms work.
+I wanted something fast, clean, and genuinely helpful—so I decided to create my own version.
 
-It’s simple to use, looks good, and gives you clear insights into how you're improving over time.
-
+It’s simple, minimal, and gives clear insights into how your typing improves over time.
 ---
 
-## 🌟 Why We Built TypoNinja
+## 🌟 Why I Built TypoNinja
 Most typing sites either look outdated or don’t give meaningful stats.  
 We wanted a tool that:
 
