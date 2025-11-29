@@ -1,188 +1,89 @@
-🚀 TypoNinja – Modern Typing Speed & Accuracy Trainer
+# 🚀 TypoNinja
 
-TypoNinja is a sleek, minimal, and highly interactive typing practice platform inspired by Monkeytype.
-It is designed to help users improve typing speed, accuracy, focus, and long-term productivity through real-time statistics and visual analytics.
+TypoNinja is a typing practice website I built with my team because we were tired of old, boring typing tools.  
+We wanted something modern, fast, clean, and actually helpful — so we created TypoNinja.
 
-🌟 Why TypoNinja?
+It’s simple to use, looks good, and gives you clear insights into how you're improving over time.
 
-Most typing tools feel outdated, boring, and lack proper analytics.
-TypoNinja solves this by offering:
+---
 
-🎨 A clean & modern UI
+## 🌟 Why We Built TypoNinja
+Most typing sites either look outdated or don’t give meaningful stats.  
+We wanted a tool that:
 
-⚡ Real-time feedback
+- feels smooth and minimal  
+- shows real-time performance  
+- tracks your progress  
+- saves your typing history  
+- helps you actually get better  
 
-📈 Advanced analytics & performance graphs
+So TypoNinja focuses on **speed, accuracy, consistency, and progress over time**, without distractions.
 
-👤 User accounts with saved history
+---
 
-📊 Progress tracking over time
+## ⚡ What You Can Do on TypoNinja
 
-📱 Fully responsive design
+### ⌨ **Typing Experience**
+- Take fast typing tests (15s, 30s, 60s)
+- See your WPM, accuracy, and errors instantly
+- Words turn green/red as you type — no guesswork
+- Clean and distraction-free screen
 
-✨ Key Features
-🔥 Typing Experience
+### 📊 **Analytics**
+- Graphs that show how you’re improving
+- History of all your past tests
+- Your best scores saved
+- Accuracy + consistency breakdowns
 
-Real-time typing tests → 15s, 30s, 60s
+### 👤 **User Accounts**
+- Signup/Login with Firebase
+- Dashboard that shows:
+  - Your email  
+  - Date you joined  
+  - Saved results  
+  - Performance graph
 
-Live WPM (Words Per Minute)
+### 🎨 **UI & Experience**
+- Modern, minimal design  
+- Inspired by Monkeytype, but built in our own style  
+- Works smoothly on all devices  
 
-Accuracy & error detection
+---
 
-Highlighting correct / incorrect words
+## 🛠 Tech Behind the Project
 
-Smooth UI transitions
+### **Frontend**
+- ReactJS  
+- Context API  
+- JavaScript (ES6)  
+- HTML / CSS  
+- React Router  
+- MUI Icons  
+- react-select  
+- react-toastify  
 
-📊 Analytics & History
+### **Backend**
+- Firebase Authentication  
+- Cloud Firestore  
 
-Performance graphs (WPM, accuracy trends)
+### **Deployment**
+- Netlify (Auto Deploy from GitHub)  
+- SPA routing handled with `_redirects`
 
-Saved test history via Firebase
+---
 
-Personal bests & progress tracking
+## 🔄 How It Works (Simple Flow)
 
-Consistency metrics
+1. You sign up or log in  
+2. You start typing  
+3. We calculate your stats in real time  
+4. Your results get stored in Firestore  
+5. You can open the analytics page anytime to see your overall progress
 
-👤 User Features
+---
 
-Firebase authentication (Login / Signup)
 
-Dashboard showing:
-
-Email
-
-Account creation date
-
-Saved results
-
-Historical data with graphs
-
-🎨 UI / UX
-
-Minimal, modern design
-
-Inspired by Monkeytype
-
-Clean components & intuitive navigation
-
-Theme-friendly architecture
-
-🏗 Tech Stack
-🎯 Frontend
-
-ReactJS
-
-Context API (for theme & state management)
-
-HTML5, CSS3, JavaScript (ES6)
-
-React Router
-
-MUI Icons
-
-react-select
-
-react-toastify
-
-random-words
-
-🔥 Backend
-
-Firebase Authentication
-
-Firebase Cloud Firestore
-
-🚀 Deployment & DevOps
-
-Netlify (CI/CD auto deployment)
-
-_redirects for SPA routing
-
-GitHub integration for continuous updates
-
-🧠 System Workflow
-
-User Login / Signup
-
-User redirected to typing dashboard
-
-Typing test begins → real-time updates
-
-Stats calculated:
-
-WPM
-
-Accuracy
-
-Errors
-
-Consistency
-
-Data saved in Firestore
-
-Analytics page fetches data & displays graphs
-
-🖥 Screens & UI Preview
-
-Home Page
-
-Typing Test Page
-
-Login / Signup
-
-User Dashboard
-
-Performance Analytics Page
-
-(Add screenshots if you have them!)
-
-👥 Team Contributions
-Sarvan Singh
-
-Typing Box frontend
-
-Firebase backend integration
-
-Database structure & user history
-
-Component integration
-
-Deepanshu Goyal
-
-Frontend logic for User Page
-
-Project management
-
-Vivek Sharma
-
-User authentication
-
-Sign Up / Registration
-
-Varun Sharma
-
-UI/UX wireframing
-
-User research
-
-Testing & user experience checks
-
-🧩 Challenges We Solved
-
-Integrating Firebase smoothly with React
-
-Designing a clean and intuitive UI
-
-Handling real-time stats computation
-
-Fetching & storing analytics data
-
-Time management during development
-
-🏁 Conclusion
-
-TypoNinja is a powerful, user-friendly, and highly efficient typing practice platform.
-With real-time stats, advanced analytics, clean UI, and cloud-based history, it gives users everything they need to improve typing skills effectively.
+---
 
 ## 🏆 Skills & Technologies
 
