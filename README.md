@@ -1,70 +1,106 @@
-# Getting Started with Create React App
+# 🥷 TypoNinja
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+TypoNinja is a typing practice website I built to sharpen my skills and explore how modern typing platforms work.
+I wanted something fast, clean, and genuinely helpful—so I decided to create my own version.
 
-## Available Scripts
+It’s simple, minimal, and gives clear insights into how your typing improves over time.
+---
 
-In the project directory, you can run:
+## 🌟 Why I Built TypoNinja
+Most typing sites either look outdated or don’t give meaningful stats.  
+We wanted a tool that:
 
-### `npm start`
+- feels smooth and minimal  
+- shows real-time performance  
+- tracks your progress  
+- saves your typing history  
+- helps you actually get better  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+So TypoNinja focuses on **speed, accuracy, consistency, and progress over time**, without distractions.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## ⚡ What You Can Do on TypoNinja
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### ⌨ **Typing Experience**
+- Take fast typing tests (15s, 30s, 60s)
+- See your WPM, accuracy, and errors instantly
+- Words turn green/red as you type — no guesswork
+- Clean and distraction-free screen
 
-### `npm run build`
+### 📊 **Analytics**
+- Graphs that show how you’re improving
+- History of all your past tests
+- Your best scores saved
+- Accuracy + consistency breakdowns
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 👤 **User Accounts**
+- Signup/Login with Firebase
+- Dashboard that shows:
+  - Your email  
+  - Date you joined  
+  - Saved results  
+  - Performance graph
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 🎨 **UI & Experience**
+- Modern, minimal design  
+- Inspired by Monkeytype, but built in our own style  
+- Works smoothly on all devices  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🛠 Tech Behind the Project
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### **Frontend**
+- ReactJS  
+- Context API  
+- JavaScript (ES6)  
+- HTML / CSS  
+- React Router  
+- MUI Icons  
+- react-select  
+- react-toastify  
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### **Backend**
+- Firebase Authentication  
+- Cloud Firestore  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### **Deployment**
+- Netlify (Auto Deploy from GitHub)  
+- SPA routing handled with `_redirects`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🔄 How It Works (Simple Flow)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. You sign up or log in  
+2. You start typing  
+3. We calculate your stats in real time  
+4. Your results get stored in Firestore  
+5. You can open the analytics page anytime to see your overall progress
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## 🏆 Skills & Technologies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 💻 Languages & Frameworks  
+<p align="left">
+  
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react"/>
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript"/>
+  <img src="https://img.shields.io/badge/HTML5-E44D26?style=for-the-badge&logo=html5"/>
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3"/>
+</p>
 
-### Making a Progressive Web App
+### 🔧 Tools & Services  
+<p align="left">
+  <img src="https://img.shields.io/badge/Firebase-ffcc30?style=for-the-badge&logo=firebase"/>
+  <img src="https://img.shields.io/badge/Netlify-00c7b7?style=for-the-badge&logo=netlify"/>
+  <img src="https://img.shields.io/badge/GitHub-000?style=for-the-badge&logo=github"/>
+  <img src="https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visualstudiocode"/>
+</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
