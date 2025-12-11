@@ -23,12 +23,12 @@ const Footer = () =>{             //THEME OPTIONS BY USER
           <a 
             href='https://github.com/Sarvan-Singh7' 
             target="_blank"
-            style={{ color: theme.textColor }}    //  icon color based on theme
+            style={{ color: theme.textColor }}
           >
             <GitHubIcon 
               style={{
                 marginRight:'4px',
-                color: theme.textColor,           //  dynamic icon color
+                color: theme.textColor,
                 transition: "0.2s ease"
               }}
             />
@@ -38,11 +38,11 @@ const Footer = () =>{             //THEME OPTIONS BY USER
           <a 
             href='https://www.linkedin.com/in/sarvan-singh-6b3b27390/' 
             target="_blank"
-            style={{ color: theme.textColor }}    //  icon color based on theme
+            style={{ color: theme.textColor }}
           >
             <LinkedInIcon 
               style={{
-                color: theme.textColor,           //  dynamic icon color
+                color: theme.textColor,
                 transition: "0.2s ease"
               }}
             />
@@ -52,28 +52,34 @@ const Footer = () =>{             //THEME OPTIONS BY USER
       </div>
 
       <div className="themeButton">
-        <Select                       //ye Select Component toh import kiya hai react-select npm se sara styles wagara le raha hai
-          onChange={handleChange}    //this is a function work on new theme select
+        <Select
+          onChange={handleChange}
           options={themeOptions}
           menuPlacement='top'
           defaultValue={{ label: theme.label, value: theme }}
           styles={{
             control: (styles) => ({ 
               ...styles, 
-              backgroundColor: theme.backgroundColor, // color of the select bar itself
+              backgroundColor: theme.backgroundColor,
+              borderColor: theme.textColor,
+              border: `2px solid ${theme.textColor}`,
             }),
             menu: (styles) => ({ 
               ...styles, 
-              backgroundColor: theme.backgroundColor, // color of the dropdown menu
+              backgroundColor: theme.backgroundColor,
             }),
             option: (styles, { isFocused }) => {
               return {
                 ...styles,
-                backgroundColor: (isFocused) ? theme.background : theme.textColor,
-                color: (isFocused) ? theme.textColor : theme.typeBoxText,
+                backgroundColor: (isFocused) ? theme.textColor : theme.backgroundColor,
+                color: (isFocused) ? theme.backgroundColor : theme.textColor,
                 cursor: 'pointer'
               }
             },
+            singleValue: (styles) => ({
+              ...styles,
+              color: theme.textColor,
+            }),
           }}
         />
       </div>
